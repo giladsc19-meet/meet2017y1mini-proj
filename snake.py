@@ -10,7 +10,7 @@ turtle.setup(size_x,size_y) #curious? it,s the turtle window. size.
 
 turtle.penup()
 
-square_size=22
+square_size=20
 start_length=5
 
 #intialize lists
@@ -124,15 +124,15 @@ def move_snake():
         food_pos.pop(food_ind)
         food_stamps.pop(food_ind)
         print("you have eaten the food!!!!!")
+        make_food()
     
     old_stamp=stamp_list.pop(0)
     snake.clearstamp(old_stamp)
     pos_list.pop(0)
     #grab position of snake
     new_pos=snake.pos()
+
     new_x_pos=new_pos[0]
-
-
     new_y_pos=new_pos[1]
 
     if new_x_pos>=RIGHT_EDGE:
@@ -150,7 +150,9 @@ def move_snake():
     elif new_y_pos<=BOTTOM_EDGE:
         print("you hit the bottom edge! gmae over!!!!!:(")
         quit()
-
+    if new_pos==
+        print("you ate yourself!!!!!!!!!!!!")
+        quit()
     turtle.ontimer(move_snake,TIME_STEP)
 
 move_snake()
@@ -169,4 +171,23 @@ food_stamps=[]
 for this_food_pos in food_pos:
     food.goto(this_food_pos)
     food2 = food.stamp()
-    food_stamp.append(food2)
+    food_stamps.append(food2)
+
+def make_food():
+#the screen positions go from - size/2+size/2 but we need to make food pieces only appear on game squares so we cut up the game board into multiples of 
+#square_size
+    min_x=-int(size_x/2/square_size)+1
+    max_x=int(size_x/2/square_size)-1
+    min_y=-int(size_y/2/square_size)+1
+    max_y=int(size_y/2/square_size)-1
+
+#pick a position that is random multiple of square_size
+    food_x=random.randint(min_x,max_x)*square_size
+    food_y=random.randint(min_y,max_y)*square_size
+    food.goto(food_x,food_y)
+    random_food= (food_x,food_y)
+    random_food_stamp=food.stamp()
+    food_stamps.append(random_food_stamp)
+    food_pos.append(random_food)
+
+
