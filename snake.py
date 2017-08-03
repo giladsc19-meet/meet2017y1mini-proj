@@ -6,9 +6,19 @@ turtle.tracer(1,0) #this helps the turtle move more smoothlty.
 size_x=800
 size_y=500
 
-turtle.setup(size_x,size_y) #curious? it,s the turtle window. size.
+turtle.setup(850,550) #curious? it,s the turtle window. size.
 
 turtle.penup()
+turtle.goto(-400,-250)
+turtle.pendown()
+turtle.goto(400,-250)
+turtle.goto(400,250)
+turtle.goto(-400,250)
+turtle.goto(-400,-250)
+
+turtle.penup()
+turtle.goto(0,0)
+turtle.hideturtle()
 
 square_size=20
 start_length=5
@@ -120,7 +130,9 @@ def move_snake():
     if snake.pos() in food_pos:
         food_ind=food_pos.index(snake.pos())
         food.clearstamp(food_stamps[food_ind]) #remove eaten food
-
+        new_stamp_length=snake.stamp()
+        stamp_list.append(new_stamp_length)
+        
         food_pos.pop(food_ind)
         food_stamps.pop(food_ind)
         print("you have eaten the food!!!!!")
@@ -150,20 +162,21 @@ def move_snake():
     elif new_y_pos<=BOTTOM_EDGE:
         print("you hit the bottom edge! gmae over!!!!!:(")
         quit()
-    if new_pos==
+    if new_pos in pos_list[0:-1]:
         print("you ate yourself!!!!!!!!!!!!")
         quit()
+    
     turtle.ontimer(move_snake,TIME_STEP)
 
 move_snake()
 
-turtle.register_shape("trash.gif")
+turtle.register_shape("mouse.gif")
 #add trash picture
 #make sure you have downloaded this shape
 #from the google drive folder and saved it
 #in the same folder as this python script
 food=turtle.clone()
-food.shape("trash.gif")
+food.shape("mouse.gif")
 
 #locations of food
 food_pos=[(100,100),(-100,100),(-100,-100),(100,-100)]
